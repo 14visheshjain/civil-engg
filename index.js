@@ -14,8 +14,6 @@ app.get('/',function(req ,res){
 app.post("/EPrest" , function(req ,res){
     let body = req.body;
 
-       
-
     let phi = Number(body.phi);
     let sinval =  Math.sin( (phi *3.141/180 ) );
     let ans1 = 1-sinval;
@@ -48,7 +46,7 @@ app.post("/EPrest" , function(req ,res){
     }
 
 
-    res.render('EPrest2' , { A : [ ["For corse grained soil" , ans1 ], [ "Grained ,  normally consolidated soil :" ,ans2], [ "Brooker & Kulway :" ,ans3], ["Mayne & Kulway :" ,ans4], ["Elastic Solution :" ,ans5]]});
+    res.render('EPrest2' , { A : [ ["Jaky, 1994" , ans1 ], [ "Massarch, 1979" ,ans2], [ "Brooker & Ireland, 1965" ,ans3], ["Mayne & Kulway, 1982" ,ans4], ["Elastic Solution" ,ans5]]});
 
 });
 app.get("/EPrest" , function(req ,res){
@@ -111,7 +109,13 @@ app.post("/EPactive" , function(req ,res){
     if(body.delta =='' && body.theta=='' && body.delta ==''){
         ans4  = "Not Applicable";
         }
-        res.render('EPrest2' , { A : [ ["Rankine Earth Theory " , ans1 ], [ "Rankine Earth Theory " ,ans2], [ "Rankine Earth Theory for inclined backfill"  ,ans3], ["Coulomb's Theory" ,ans4] ]});
+        ans4 = Number(ans4);
+        if(Number.isNaN(ans4)){
+            ans4 = "Not Applicable";
+            console.log(ans4);
+        }
+        
+        res.render('EPrest2' , { A : [ ["Rankine Earth Theory " , ans1 ], [ "Rankine Earth Theory for inclined backfill"  ,ans3], ["Coulomb's Theory" ,ans4] ]});
 
 });
 app.get("/EPactive" , function(req ,res){
@@ -248,12 +252,12 @@ app.post("/StressNoWater" , function(req ,res){
 
     let ans = Number(D) + Number(Yo) ;
     // console.log(ans +" "+D+" "+Yo);
-    res.render('EPrest2' , {A: [ ["Ka",Ka ] ,["Kp" , Kp] , [ "Pa bar" , Pa_] , ["Yo" , Yo] 
+    res.render('EPrest2' , {A: [  ["Ka",Ka ] ,["Kp" , Kp] , [ "Pa_" , Pa_] , ["Yo" , Yo] 
         , [ "Pp3_" , Pp3_] ,
         [ "Y1" , Y1] ,
         [ "C1" , C1 ],[ "C2" , C2 ],[ "C3" , C3 ],[ "C4" , C4 ],
-        [ "D" , D],
-        ["ans"  , ans]
+        [ "Do" , D],
+        ["Depth of Penetration"  , ans]
 ]});
 });
 
@@ -335,12 +339,12 @@ app.post("/StressWithWater" , function(req ,res){
 
     let ans = Number(D) + Number(L3) ;
 
-    res.render('EPrest2' , {A: [ ["Ka",Ka ] ,["Kp" , Kp] , [ "L3 :" , L3] , ["Z : " , Z] ,
+    res.render('EPrest2' , {A: [ ["Ka",Ka ] ,["Kp" , Kp] , [ "L3" , L3] , ["Z" , Z] ,
 
-    [ "P0" , Po ],[ "P1" , P1 ],[ "P2" , P2 ],[ "P3" , P3 ],   
+    [ "Po" , Po ],[ "P1" , P1 ],[ "P2" , P2 ],[ "P3" , P3 ],   
      [ "C1" , C1 ],[ "C2" , C2 ],[ "C3" , C3 ],[ "C4" , C4 ],
-    [ "D" , D],
-    ["ans"  , ans]
+    [ "Do" , D],
+    ["Depth of Penetration"  , ans]
 ]});
     console.log(ans +" "+D);
 });
@@ -349,5 +353,5 @@ app.get("/StressWithWater" , function(req ,res){
 });
 
 app.listen(5000 , function(){
-    console.log("server started at port 3000");
+    console.log("server started at port 5000");
 })

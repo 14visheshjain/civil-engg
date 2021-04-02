@@ -25,13 +25,40 @@
 
     <title>EP Rest</title>
 </head>
-<body>
-    <h1>Brooker and Ireland : </h1>
-    <% A.forEach(function( item ) {%>
-      <h2> <%= item[0] %> </h2>
-    <h2> <%= item[1] %> </h2>
-     <% }) %>
-        
+<body  style="display: grid; place-items: center; background-color: lightgray; ">
+
+    <div class="container " style="margin-top:5%" >
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col"  style="border: solid gray 2px;background-color:white;text-align: center;font-size: 24px;font-weight: bold; ">
+          Variable
+        </div>
+        <div class="col"  style="border: solid gray 2px;background-color:white;text-align: center;font-size: 24px;font-weight: bold;">
+          Value
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <% A.forEach(function( item ) {%>
+
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col"  style="border: solid gray 2px;background-color:white;text-align: center;font-size: 24px; ">
+          <%= item[0] %>
+        </div>
+        <div class="col"  style="border: solid gray 2px;background-color:white;text-align: center;font-size: 24px;">
+          <%= item[1] %> 
+        </div>
+        <div class="col">
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    
+
+
 </body>
 </html>
 
