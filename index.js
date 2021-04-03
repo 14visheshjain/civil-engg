@@ -352,6 +352,6 @@ app.get("/StressWithWater" , function(req ,res){
     res.render('StressWithWater')
 });
 
-app.listen(5000 , function(){
+app.listen(process.env.PORT || 5000 , function(){
     console.log("server started at port 5000");
 })
